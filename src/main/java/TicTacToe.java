@@ -34,7 +34,7 @@ public class TicTacToe extends JFrame implements MouseListener, Runnable {
   private Graphics g = offsetImg.getGraphics();// 双缓冲解决闪烁问题
   private int[][] maps = new int[15][15];// 0无棋子，1黑子，2白子
   private boolean isBlack = true;// 是否是黑方的回合
-  private String message = "黑方先行", whitemessage = "无限制", blackmessage = "无限制";// 界面上方信息，下方时间信息
+  private String message = "5 in a Row，horizontally, vertically, or diagonally.", whitemessage = "无限制", blackmessage = "无限制";// 界面上方信息，下方时间信息
   // 右边操作界面
   private JButton btn_start, btn_exit, btn_settings;
   private JPanel operaterPanel;// 操作面板
@@ -100,13 +100,13 @@ public class TicTacToe extends JFrame implements MouseListener, Runnable {
    * 初始化右边操作界面
    */
   private void initOeratePane() {
-    btn_start = new JButton("开始游戏");
-    btn_settings = new JButton("游戏设置");
-    btn_exit = new JButton("退出游戏");
+    btn_start = new JButton("start game");
+    btn_settings = new JButton("game settings");
+    btn_exit = new JButton("exit");
     btn_start.addActionListener(new ActionListener() {
 
       public void actionPerformed(ActionEvent e) {
-        int select = JOptionPane.showConfirmDialog(getContentPane(), "确定要重新开始吗？");
+        int select = JOptionPane.showConfirmDialog(getContentPane(), "Do you want to start over？");
         if (select == 0) {
           reStartGame();
         }
@@ -156,7 +156,7 @@ public class TicTacToe extends JFrame implements MouseListener, Runnable {
     GridLayout layout = new GridLayout(0, 1, 100, 100);
     operaterPanel.setLayout(layout);
     operaterPanel.add(btn_start);
-    operaterPanel.add(btn_settings);
+//    operaterPanel.add(btn_settings);
     operaterPanel.add(btn_exit);
     getContentPane().add(operaterPanel, BorderLayout.EAST);
   }
@@ -184,16 +184,16 @@ public class TicTacToe extends JFrame implements MouseListener, Runnable {
     g.drawImage(bgImage, 20, 90, this);
     // 绘制上方标题
     g.setColor(Color.black);
-    g.setFont(new Font("楷体", Font.BOLD, 30));
-    g.drawString("游戏信息：" + message, 100, 75);
+    g.setFont(new Font("Dialog", Font.BOLD, 17));
+    g.drawString(message, 10, 75);
     // 绘制下方
-    g.setColor(Color.gray);
-    g.fillRect(50, 530, 200, 50);
-    g.fillRect(300, 530, 200, 50);
-    g.setColor(Color.black);
-    g.setFont(new Font("宋体", Font.BOLD, 20));
-    g.drawString("黑方时间：" + blackmessage, 60, 560);
-    g.drawString("白方时间：" + whitemessage, 310, 560);
+//    g.setColor(Color.gray);
+//    g.fillRect(50, 530, 200, 50);
+//    g.fillRect(300, 530, 200, 50);
+//    g.setColor(Color.black);
+//    g.setFont(new Font("宋体", Font.BOLD, 20));
+//    g.drawString("黑方时间：" + blackmessage, 60, 560);
+//    g.drawString("白方时间：" + whitemessage, 310, 560);
     // g.setColor(Color.blue);
     // 绘制棋盘线条
     int adjust = 12;
@@ -246,17 +246,17 @@ public class TicTacToe extends JFrame implements MouseListener, Runnable {
         if (isBlack) {
           maps[mapsY][mapsX] = 1;
           isBlack = false;
-          message = "白色落子";
+//          message = "白色落子";
         } else {
           maps[mapsY][mapsX] = 2;
           isBlack = true;
-          message = "黑色落子";
+//          message = "黑色落子";
         }
+        repaint();
         checkGame();
       }
 
     }
-    repaint();
   }
 
   /**
@@ -272,9 +272,9 @@ public class TicTacToe extends JFrame implements MouseListener, Runnable {
             || checkChess(1, -1, color);
     if (isWin) {
       if (color == 1)
-        JOptionPane.showMessageDialog(this, "黑方胜利！");
+        JOptionPane.showMessageDialog(this, "X win！");
       else {
-        JOptionPane.showMessageDialog(this, "白方胜利！");
+        JOptionPane.showMessageDialog(this, "O win！");
       }
       reStartGame();
       // new GameWindow();
