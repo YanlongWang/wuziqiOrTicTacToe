@@ -76,6 +76,7 @@ public class TicTacToe extends JFrame implements MouseListener{
     btn_exit = new JButton("exit");
     btn_start.addActionListener(new ActionListener() {
 
+      @Override
       public void actionPerformed(ActionEvent e) {
         int select = JOptionPane.showConfirmDialog(getContentPane(), "Do you want to start over？");
         if (select == 0) {
@@ -85,7 +86,7 @@ public class TicTacToe extends JFrame implements MouseListener{
       }
     });
     btn_exit.addActionListener(new ActionListener() {
-
+      @Override
       public void actionPerformed(ActionEvent e) {
         System.exit(0);
       }
@@ -145,6 +146,7 @@ public class TicTacToe extends JFrame implements MouseListener{
     g1.drawImage(offsetImg, 0, 0, this);
   }
 
+  @Override
   public void mouseClicked(MouseEvent e) {
     mouseX = e.getX();
     mouseY = e.getY();
@@ -228,17 +230,21 @@ public class TicTacToe extends JFrame implements MouseListener{
     return isWin;
   }
 
+  @Override
   public void mousePressed(MouseEvent e) {
 
   }
 
+  @Override
   public void mouseReleased(MouseEvent e) {
 
   }
 
+  @Override
   public void mouseEntered(MouseEvent e) {
   }
 
+  @Override
   public void mouseExited(MouseEvent e) {
 
   }
