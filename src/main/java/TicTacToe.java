@@ -12,7 +12,6 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,14 +19,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * @Title: GameWindow.java
- * @Package com.crossing.view
- * @Description: TODO(用一句话描述该文件做什么)
- * @author crossing
- * @date 2021年2月28日 下午9:23:14
+ * @author Yanlong Wang (wangyanlong0107@gmail.com)
+ * @date 03/13/2020
  * @version V1.0
  */
-@SuppressWarnings("serial")
 public class TicTacToe extends JFrame implements MouseListener, Runnable {
   private int width, height;// 屏幕宽高
   private int mouseX = 0, mouseY = 0, mapsX = 0, mapsY = 0;// 鼠标坐标，鼠标在地图中的位置
@@ -51,7 +46,7 @@ public class TicTacToe extends JFrame implements MouseListener, Runnable {
   // private boolean isLimitTime = false;
 
   public TicTacToe() {
-    setTitle("五子棋");
+    setTitle("TicTacToe");
     setSize(game_width, game_height);
     setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -201,27 +196,34 @@ public class TicTacToe extends JFrame implements MouseListener, Runnable {
     g.drawString("白方时间：" + whitemessage, 310, 560);
     // g.setColor(Color.blue);
     // 绘制棋盘线条
-    for (int i = 0; i < 15; i++) {
-      g.drawLine(60, 130 + i * chessBoardItemWidth, 410, 130 + i * chessBoardItemWidth);
-      g.drawLine(60 + i * chessBoardItemWidth, 130, 60 + i * chessBoardItemWidth, 480);
+    int adjust = 12;
+    for (int i = 0; i < 16; i++) {
+      g.drawLine(60 - adjust, 130 - adjust + i * chessBoardItemWidth, 410 + adjust, 130 - adjust + i * chessBoardItemWidth);
+      g.drawLine(60 + i * chessBoardItemWidth - adjust, 130 - adjust, 60 - adjust + i * chessBoardItemWidth, 480 + adjust);
     }
     // 标注点位
-    g.fillOval(131, 200, 8, 8);
-    g.fillOval(331, 200, 8, 8);
-    g.fillOval(131, 400, 8, 8);
-    g.fillOval(331, 400, 8, 8);
-    g.fillOval(230, 299, 10, 10);
+//    g.fillOval(131, 200, 8, 8);
+//    g.fillOval(331, 200, 8, 8);
+//    g.fillOval(131, 400, 8, 8);
+//    g.fillOval(331, 400, 8, 8);
+//    g.fillOval(230, 299, 10, 10);
 
     // 绘制棋子
     for (int j = 0; j < maps.length; j++) {
       for (int i = 0; i < maps[0].length; i++) {
+        int x1 = 50 + i * chessBoardItemWidth;
+        int y1 = 120 + j * chessBoardItemWidth;
         if (maps[j][i] == 1) {
-          g.setColor(Color.black);
-          g.fillOval(50 + i * chessBoardItemWidth, 120 + j * chessBoardItemWidth, 20, 20);
+          g.setColor(Color.blue);
+//          g.fillOval(50 + i * chessBoardItemWidth, 120 + j * chessBoardItemWidth, 20, 20);
+          int x2 = 50 + i * chessBoardItemWidth + chessBoardItemWidth - 1;
+          int y2 = 120 + j * chessBoardItemWidth + chessBoardItemWidth - 1;
+          g.drawLine(x1, y1,x2, y2);
+          g.drawLine(x1, y2,x2, y1);
         }
         if (maps[j][i] == 2) {
-          g.setColor(Color.white);
-          g.fillOval(50 + i * chessBoardItemWidth, 120 + j * chessBoardItemWidth, 20, 20);
+          g.setColor(Color.red);
+          g.drawOval(x1, y1, 20, 20);
         }
       }
     }
